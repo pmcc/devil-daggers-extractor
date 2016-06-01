@@ -1,4 +1,4 @@
-# devil-daggers-extractor
+# Devil Daggers game data extractor
 - Audio (.wav)
 - Textures (.png)
 - Shaders (.glsl)
