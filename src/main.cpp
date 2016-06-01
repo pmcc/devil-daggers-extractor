@@ -6,6 +6,8 @@
 #include <map>
 #include <functional>
 
+#include "libs.h"
+
 #include "chunk.h"
 #include "texture.h"
 #include "shader.h"
