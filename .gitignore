@@ -1,0 +1,7 @@
+/*
+!.gitignore
+!/src
+!/ext
+!/vsproj/*
+/vsproj/*.user
+!*.sln
