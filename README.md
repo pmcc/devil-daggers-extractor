@@ -21,6 +21,5 @@ example: dd_extract.exe "C:\Program Files (x86)\Steam\steamapps\common\devildagg
 - Visual Studio 2015
 
 # TODO
-- Write a FbxStream wrapper for std::ostream
 - Add texturing to FBX export
 - Handle additional 3D formats
