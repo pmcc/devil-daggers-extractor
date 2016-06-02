@@ -56,7 +56,7 @@ public:
     virtual void init(char* buffer) = 0;
     virtual uint8_t getNumberOfFiles() const = 0;
     virtual std::string getFilename(uint8_t file) const = 0;
-    virtual bool extract(uint8_t file, std::ostream& output, const char* tmpPath) const = 0;
+    virtual bool extract(uint8_t file, std::ostream& output) const = 0;
 
     const char* getName() const { return m_name; }
     uint32_t getStartOffset() const { return m_startOffset; }

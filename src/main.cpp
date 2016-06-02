@@ -8,12 +8,12 @@
 
 #include "libs.h"
 
-#include "chunk.h"
-#include "texture.h"
-#include "shader.h"
-#include "audio.h"
-#include "model_binding.h"
-#include "model.h"
+#include "chunk/chunk.h"
+#include "chunk/texture.h"
+#include "chunk/shader.h"
+#include "chunk/audio.h"
+#include "chunk/model_binding.h"
+#include "chunk/model.h"
 
 std::map<uint16_t, std::function<Chunk*()>> Chunk::m_factory;
 
@@ -175,9 +175,6 @@ int main(int argc, char** argv)
 
         for (uint8_t file = 0; file < chunk->getNumberOfFiles(); ++file)
         {
-            // temporary until I write a FbxStream wrapper for std::ostream... quite lazy at the moment :)
-            const char* tmpPath = nullptr;
-
             // open destination file
             std::ofstream output;
             const char* folder = getFolder(type);
@@ -204,24 +201,13 @@ int main(int argc, char** argv)
                 filename.replace_extension(extension);
             }
 
-            std::string tmpString = filename.string();
-            if (type == CHUNK_MODEL)
-            {
-                tmpPath = tmpString.c_str();
-            }
-
-            if (!tmpPath)
-            {
-                output.open(filename, std::ios::binary);
-            }
-
             // extract the content!
-            chunk->extract(file, output, tmpPath);
-
+            output.open(filename, std::ios::binary);
             if (output.is_open())
             {
-                output.close();
+                chunk->extract(file, output);
             }
+            output.close();
         }
 
         delete[] buffer;

@@ -2,27 +2,56 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp" />
-    <ClCompile Include="..\src\texture.cpp" />
-    <ClCompile Include="..\src\shader.cpp" />
-    <ClCompile Include="..\src\model.cpp" />
-    <ClCompile Include="..\src\audio.cpp" />
-    <ClCompile Include="..\src\model_binding.cpp" />
     <ClCompile Include="..\ext\lodepng\lodepng.cpp">
       <Filter>lodepng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\chunk\model_binding.cpp">
+      <Filter>chunk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\chunk\shader.cpp">
+      <Filter>chunk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\chunk\texture.cpp">
+      <Filter>chunk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\chunk\audio.cpp">
+      <Filter>chunk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\chunk\model.cpp">
+      <Filter>chunk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\fbx\fbx_output_stream.cpp">
+      <Filter>fbx</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\chunk.h" />
-    <ClInclude Include="..\src\texture.h" />
-    <ClInclude Include="..\src\shader.h" />
-    <ClInclude Include="..\src\model.h" />
-    <ClInclude Include="..\src\audio.h" />
-    <ClInclude Include="..\src\model_binding.h" />
     <ClInclude Include="..\src\libs.h" />
     <ClInclude Include="..\ext\lodepng\lodepng.h">
       <Filter>lodepng</Filter>
     </ClInclude>
     <ClInclude Include="..\ext\fbx\include\fbxsdk.h">
+      <Filter>fbx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\chunk\model.h">
+      <Filter>chunk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\chunk\model_binding.h">
+      <Filter>chunk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\chunk\shader.h">
+      <Filter>chunk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\chunk\texture.h">
+      <Filter>chunk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\chunk\audio.h">
+      <Filter>chunk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\chunk\chunk.h">
+      <Filter>chunk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\fbx\fbx_output_stream.h">
       <Filter>fbx</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,6 +64,9 @@
     </Filter>
     <Filter Include="fbx">
       <UniqueIdentifier>{9b070aa4-428f-4e54-b2eb-cd50866e36b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chunk">
+      <UniqueIdentifier>{765a00cc-665c-43da-81ec-4967609057dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

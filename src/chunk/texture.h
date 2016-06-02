@@ -23,7 +23,7 @@ public:
     uint8_t getNumberOfFiles() const;
     std::string getFilename(uint8_t file) const;
 
-    bool extract(uint8_t file, std::ostream& output, const char* tmpPath) const override;
+    bool extract(uint8_t file, std::ostream& output) const override;
 };
 
 #endif // TEXTURE_H

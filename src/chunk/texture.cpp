@@ -35,7 +35,7 @@ std::string Texture::getFilename(uint8_t file) const
 #endif
 }
 
-bool Texture::extract(uint8_t file, std::ostream& output, const char* tmpPath) const
+bool Texture::extract(uint8_t file, std::ostream& output) const
 {
     uint32_t width = m_header->m_width >> file;
     uint32_t height = m_header->m_height >> file;

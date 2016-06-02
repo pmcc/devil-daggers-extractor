@@ -1,5 +1,7 @@
 #include "model.h"
 
+#include "fbx/fbx_output_stream.h"
+
 // Lots of temporary code in that file.
 
 FbxManager* Model::s_fbxManager = nullptr;
@@ -35,9 +37,11 @@ std::string Model::getFilename(uint8_t file) const
     return std::string(m_name);
 }
 
-bool Model::extract(uint8_t file, std::ostream& output, const char* path) const
+bool Model::extract(uint8_t file, std::ostream& output) const
 {
-    Vertex* vertices = (Vertex*)(m_buffer); // can't remember why I added 2 here (lol.)
+    FbxOutputStream stream;
+
+    Vertex* vertices = (Vertex*)(m_buffer);
     uint32_t* indices = (uint32_t*)((char*)vertices + sizeof(Vertex) * m_header->m_vertexCount);
 
     FbxScene* scene = FbxScene::Create(s_fbxManager, "Root");
@@ -175,7 +179,7 @@ bool Model::extract(uint8_t file, std::ostream& output, const char* path) const
         IOS_REF.SetBoolProp(EXP_FBX_GLOBAL_SETTINGS, true);
 
         // Initialize the exporter by providing a filename.
-        if (lExporter->Initialize(path, pFileFormat, s_fbxManager->GetIOSettings()) == false)
+        if (lExporter->Initialize(&stream, &output, pFileFormat, s_fbxManager->GetIOSettings()) == false)
         {
             FBXSDK_printf("Call to FbxExporter::Initialize() failed.\n");
             FBXSDK_printf("Error returned: %s\n\n", lExporter->GetStatus().GetErrorString());

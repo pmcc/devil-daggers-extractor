@@ -20,7 +20,7 @@ std::string Audio::getFilename(uint8_t file) const
     return std::string(m_name);
 }
 
-bool Audio::extract(uint8_t file, std::ostream& output, const char* tmpPath) const
+bool Audio::extract(uint8_t file, std::ostream& output) const
 {
     output.write(m_buffer, m_size);
 

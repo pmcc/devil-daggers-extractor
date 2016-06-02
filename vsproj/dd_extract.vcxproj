@@ -20,23 +20,26 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\ext\lodepng\lodepng.cpp" />
-    <ClCompile Include="..\src\audio.cpp" />
+    <ClCompile Include="..\src\chunk\audio.cpp" />
+    <ClCompile Include="..\src\chunk\model.cpp" />
+    <ClCompile Include="..\src\chunk\model_binding.cpp" />
+    <ClCompile Include="..\src\chunk\shader.cpp" />
+    <ClCompile Include="..\src\chunk\texture.cpp" />
+    <ClCompile Include="..\src\fbx\fbx_output_stream.cpp" />
     <ClCompile Include="..\src\main.cpp" />
-    <ClCompile Include="..\src\model.cpp" />
-    <ClCompile Include="..\src\model_binding.cpp" />
-    <ClCompile Include="..\src\shader.cpp" />
-    <ClCompile Include="..\src\texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\ext\fbx\include\fbxsdk.h" />
     <ClInclude Include="..\ext\lodepng\lodepng.h" />
-    <ClInclude Include="..\src\audio.h" />
     <ClInclude Include="..\src\chunk.h" />
+    <ClInclude Include="..\src\chunk\audio.h" />
+    <ClInclude Include="..\src\chunk\chunk.h" />
+    <ClInclude Include="..\src\chunk\model.h" />
+    <ClInclude Include="..\src\chunk\model_binding.h" />
+    <ClInclude Include="..\src\chunk\shader.h" />
+    <ClInclude Include="..\src\chunk\texture.h" />
+    <ClInclude Include="..\src\fbx\fbx_output_stream.h" />
     <ClInclude Include="..\src\libs.h" />
-    <ClInclude Include="..\src\model.h" />
-    <ClInclude Include="..\src\model_binding.h" />
-    <ClInclude Include="..\src\shader.h" />
-    <ClInclude Include="..\src\texture.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="includes" />

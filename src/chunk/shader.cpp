@@ -37,7 +37,7 @@ std::string Shader::getFilename(uint8_t file) const
     return name;
 }
 
-bool Shader::extract(uint8_t file, std::ostream& output, const char* tmpPath) const
+bool Shader::extract(uint8_t file, std::ostream& output) const
 {
     uint32_t offset = 0;
     uint32_t size = 0;
