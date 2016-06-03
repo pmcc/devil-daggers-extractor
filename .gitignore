@@ -1,6 +1,7 @@
 !.gitignore
 /.*
 *.db
+*.VC.*
 /bin/*
 /tmp/*
 *.user
