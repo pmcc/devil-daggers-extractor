@@ -1,7 +1,6 @@
-/*
 !.gitignore
-!/src
-!/ext
-!/vsproj/*
-/vsproj/*.user
-!*.sln
+/.*
+*.db
+/bin/*
+/tmp/*
+*.user
