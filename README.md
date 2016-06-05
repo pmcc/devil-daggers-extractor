@@ -3,7 +3,7 @@ This tool extracts data from Devil Daggers package files:
 - Audio (.wav)
 - Textures (.png)
 - Shaders (.glsl)
-- Models (.fbx - WIP)
+- Models (.obj)
 
 # Usage
 ```
@@ -21,5 +21,6 @@ example: dd_extract.exe "C:\Program Files (x86)\Steam\steamapps\common\devildagg
 - Visual Studio 2015
 
 # TODO
-- Add texturing to FBX export
+- Fix FBX export
+- Add texturing to OBJ export
 - Handle additional 3D formats
