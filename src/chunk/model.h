@@ -3,7 +3,13 @@
 
 #include "chunk.h"
 
+#define ENABLE_FBX  0
+
+#if ENABLE_FBX
+
 #include <fbxsdk.h>
+
+#endif
 
 #pragma pack(push)
 #pragma pack(2)
@@ -37,9 +43,13 @@ private:
         float m_uv[2];
     };
 
+#if ENABLE_FBX
+
 private:
 
     static FbxManager* s_fbxManager;
+
+#endif
 };
 
 #endif // MODEL_H

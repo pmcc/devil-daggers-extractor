@@ -41,7 +41,11 @@ const char* getExtension(uint16_t type)
     switch (type)
     {
         case CHUNK_TEXTURE: return ".png";
+#if ENABLE_FBX
         case CHUNK_MODEL: return ".fbx";
+#else
+        case CHUNK_MODEL: return ".obj";
+#endif
         case CHUNK_AUDIO: return ".wav";
         case CHUNK_SHADER: return ".glsl";
         case CHUNK_MODEL_BINDS: return ".txt";

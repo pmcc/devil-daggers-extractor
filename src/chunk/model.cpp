@@ -1,28 +1,40 @@
 #include "model.h"
 
-#include "fbx/fbx_output_stream.h"
-
 // Lots of temporary code in that file.
+
+#if ENABLE_FBX
+
+#include "fbx/fbx_output_stream.h"
 
 FbxManager* Model::s_fbxManager = nullptr;
 
+#endif
+
 Model::~Model()
 {
+#if ENABLE_FBX
+
     if (s_fbxManager)
     {
         s_fbxManager->Destroy();
         s_fbxManager = nullptr;
     }
+
+#endif
 }
 
 Chunk* Model::create()
 {
+#if ENABLE_FBX
+
     if (!s_fbxManager)
     {
         s_fbxManager = FbxManager::Create();
         FbxIOSettings* fbxIos = FbxIOSettings::Create(s_fbxManager, IOSROOT);
         s_fbxManager->SetIOSettings(fbxIos);
     }
+
+#endif
 
     return new Model();
 }
@@ -39,10 +51,10 @@ std::string Model::getFilename(uint8_t file) const
 
 bool Model::extract(uint8_t file, std::ostream& output) const
 {
-    FbxOutputStream stream;
-
     Vertex* vertices = (Vertex*)(m_buffer);
     uint32_t* indices = (uint32_t*)((char*)vertices + sizeof(Vertex) * m_header->m_vertexCount);
+
+#if ENABLE_FBX
 
     FbxScene* scene = FbxScene::Create(s_fbxManager, "Root");
     FbxMesh* mesh = FbxMesh::Create(s_fbxManager, m_name);
@@ -92,28 +104,6 @@ bool Model::extract(uint8_t file, std::ostream& output) const
             meshNode->AddMaterial(material);
         }
     }
-
-#if 0
-
-    FbxFileTexture* texture = FbxFileTexture::Create(scene, "Diffuse Texture");
-    std::string texname(m_name);
-    texname += ".png";
-    texture->SetFileName(texname.c_str());
-    texture->SetTextureUse(FbxTexture::eStandard);
-    texture->SetMappingType(FbxTexture::eUV);
-    texture->SetMaterialUse(FbxFileTexture::eModelMaterial);
-    texture->SetSwapUV(false);
-    texture->SetTranslation(0.0, 0.0);
-    texture->SetScale(1.0, 1.0);
-    texture->SetRotation(0.0, 0.0);
-    texture->Alpha.Set(1.0);
-
-    if (material)
-    {
-        material->Diffuse.ConnectSrcObject(texture);
-    }
-
-#endif
 
     for (uint32_t triangle = 0; triangle < m_header->m_indexCount / 3; ++triangle)
     {
@@ -178,6 +168,8 @@ bool Model::extract(uint8_t file, std::ostream& output) const
         IOS_REF.SetBoolProp(EXP_FBX_ANIMATION, true);
         IOS_REF.SetBoolProp(EXP_FBX_GLOBAL_SETTINGS, true);
 
+        FbxOutputStream stream;
+
         // Initialize the exporter by providing a filename.
         if (lExporter->Initialize(&stream, &output, pFileFormat, s_fbxManager->GetIOSettings()) == false)
         {
@@ -194,6 +186,27 @@ bool Model::extract(uint8_t file, std::ostream& output) const
     }
 
     scene->Destroy(true);
+
+#else
+
+    output << "# " << getName() << ".obj" << std::endl << std::endl;
+
+    output << "# Vertex Attributes" << std::endl;
+    for (uint32_t v = 0; v < m_header->m_vertexCount; ++v)
+    {
+        output << "v " << vertices[v].m_pos[0] << " " << vertices[v].m_pos[1] << " " << vertices[v].m_pos[2] << std::endl;
+        output << "vt " << vertices[v].m_uv[0] << " " << vertices[v].m_uv[1] << std::endl;
+        output << "vn " << vertices[v].m_normal[0] << " " << vertices[v].m_normal[1] << " " << vertices[v].m_normal[2] << std::endl;
+
+    }
+
+    output << std::endl << "# Triangles" << std::endl;
+    for (uint32_t triangle = 0; triangle < m_header->m_indexCount / 3; ++triangle)
+    {
+        output << "f " << indices[triangle * 3] + 1 << " " << indices[triangle * 3 + 1] + 1 << " " << indices[triangle * 3 + 2] + 1 << std::endl;
+    }
+
+#endif
 
     return true;
 }
